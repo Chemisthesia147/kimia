@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kesetimbangan Kimia - Pembelajaran Interaktif</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f0f9ff;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent: #06b6d4;
+            --accent-hover: #0891b2;
+            --accent-light: #67e8f9;
+            --purple: #a855f7;
+            --purple-hover: #9333ea;
+            --pink: #ec4899;
+            --orange: #f97316;
+            --green: #10b981;
+            --border: #e0f2fe;
+            --shadow: rgba(6, 182, 212, 0.15);
+            --card-bg: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+        }
+
+        .dark-mode {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --accent: #22d3ee;
+            --accent-hover: #06b6d4;
+            --accent-light: #67e8f9;
+            --purple: #c084fc;
+            --purple-hover: #a855f7;
+            --pink: #f472b6;
+            --orange: #fb923c;
+            --green: #34d399;
+            --border: #334155;
+            --shadow: rgba(34, 211, 238, 0.2);
+            --card-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary); /* warna utama otomatis dari variabel */
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px var(--shadow); 
+        }
+
+        .settings {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .theme-toggle {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 120px);
+            text-align: center;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .menu-grid {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .menu-card:hover {
+            border-color: var(--accent);
+            background: var(--accent-light);
+            color: var(--text-primary); /* tetap kontras saat hover */
+        }
+
+        .menu-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .menu-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .menu-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .content-section {
+            display: none;
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px var(--shadow);
+            margin-top: 2rem;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .back-btn {
+            background: var(--text-secondary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--text-primary);
+            color: var(--bg-secondary);
+        }
+
+        .content-text {
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .content-text h3 {
+            color: var(--text-primary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-text ul {
+            margin-left: 2rem;
+            margin-top: 1rem;
+        }
+
+        .content-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-option {
+            background: var(--bg-primary);
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+                }
+
+        .profile-card {
+            flex: 1 1 0;
+            min-width: 280px;
+            max-width: 400px;
+            background: white;
+            margin: 0;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .profile-card h2.content-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            font-size: 80px;
+            text-align: center;
+            margin-bottom: 20px;}
+        .profile-container {
+             display: flex;
+             gap: 2rem;
+             justify-content: center;
+             align-items: flex-start;
+             margin-bottom: 2rem;}
+       @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }}
+        .glossary-item {
+            background: var(--bg-primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .glossary-term {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+        .content-title {
+            text-align: center;
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .content-text p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .content-text strong {
+            color: #764ba2;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .profile-card {
+                padding: 30px;
+            }
+
+            .content-title {
+                font-size: 24px;
+            }
+
+            .profile-avatar {
+                font-size: 60px;
+            }
+            
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-section">
+            <img src="logo um rev.png" alt="Logo Universitas Negeri Malang"
+width="50" height="50"> 
+
+            <div class="settings">
+                <button class="theme-toggle" onclick="toggleTheme()">🌙 Mode Gelap</button>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <button class="nav-btn" onclick="goHome()">🏠 Beranda</button>
+            <button class="nav-btn" onclick="showProfile()">👤 Profil</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="welcomeScreen" class="welcome-screen">
+            <h1 class="welcome-title">Kesetimbangan Kimia</h1>
+            <p class="welcome-subtitle">Platform Pembelajaran Interaktif untuk Memahami Konsep Kesetimbangan Kimia</p>
+            <button class="start-btn" onclick="startLearning()">🚀 Mulai Belajar</button>
+        </div>
+
+        <div id="menuGrid" class="menu-grid">
+            <div class="menu-card" onclick="showContent('pendahuluan')">
+                <div class="menu-icon">📖</div>
+                <h3 class="menu-title">Pendahuluan</h3>
+                <p class="menu-desc">Pengenalan konsep dasar kesetimbangan kimia</p>
+            </div>
+            <div class="menu-card" onclick="showContent('lkpd')">
+                <div class="menu-icon">📝</div>
+                <h3 class="menu-title">LKPD</h3>
+                <p class="menu-desc">Lembar Kerja Peserta Didik untuk praktik</p>
+            </div>
+            <div class="menu-card" onclick="showContent('materi')">
+                <div class="menu-icon">📚</div>
+                <h3 class="menu-title">Materi</h3>
+                <p class="menu-desc">Materi lengkap kesetimbangan kimia</p>
+            </div>
+            <div class="menu-card" onclick="showContent('latihan')">
+                <div class="menu-icon">✍️</div>
+                <h3 class="menu-title">Latihan Soal</h3>
+                <p class="menu-desc">Uji pemahaman dengan soal-soal latihan</p>
+            </div>
+            <div class="menu-card" onclick="showContent('pustaka')">
+                <div class="menu-icon">📑</div>
+                <h3 class="menu-title">Daftar Pustaka</h3>
+                <p class="menu-desc">Referensi dan sumber belajar</p>
+            </div>
+            <div class="menu-card" onclick="showContent('glosarium')">
+                <div class="menu-icon">📖</div>
+                <h3 class="menu-title">Glosarium</h3>
+                <p class="menu-desc">Kamus istilah kesetimbangan kimia</p>
+            </div>
+        </div>
+
+        <div id="contentSection" class="content-section">
+            <button class="back-btn" onclick="backToMenu()">← Kembali</button>
+            <div id="contentBody"></div>
+        </div>
+    <div id="profileCard" class="container" style="display:none;">
+    <h1 class="content-title">Profil Pengembang</h1>
+    <div class="profile-container">
+        <!-- Profil Kiri -->
+        <div class="profile-card">
+            <div class="profile-avatar">👨‍🎓</div>
+            <h2 class="content-title">Tsary Aqilah Arinanta</h2>
+            <div class="content-text">
+                <p> Seorang mahasiswa di Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Universitas Negeri Malang dengan Program Studi S1 Pendidikan Kimia.</p>
+            </div>
+        </div>
+        <!-- Profil Kanan -->
+        <div class="profile-card">
+            <div class="profile-avatar">👩‍🎓</div>
+            <h2 class="content-title">Prof. Dr. Sumari, M.Si.</h2>
+            <div class="content-text">
+                <p>Seorang Dosen di Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Universitas Negeri Malang (UM), beliau adalah bagian dari Departemen Kimia yang memiliki kepakaran di bidang Kimia Fisika. Profilnya sebagai dosen juga tercatat dalam direktori kepakaran Universitas Negeri Malang dan berbagai publikasi ilmiahnya dapat diakses melalui Google Scholar serta SINTA.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        let isDarkMode = false;
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = isDarkMode ? '☀️ Mode Terang' : '🌙 Mode Gelap';
+        }
+
+        function startLearning() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('menuGrid').style.display = 'grid';
+        }
+
+        function goHome() {
+            document.getElementById('welcomeScreen').style.display = 'flex';
+            document.getElementById('menuGrid').style.display = 'none';
+            document.getElementById('contentSection').classList.remove('active');
+            document.getElementById('profileCard').style.display = 'none';
+        }
+
+        function showProfile() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('menuGrid').style.display = 'none';
+            document.getElementById('contentSection').classList.remove('active');
+            document.getElementById('profileCard').style.display = 'block';
+        }
+
+        function backToMenu() {
+            document.getElementById('contentSection').classList.remove('active');
+            document.getElementById('menuGrid').style.display = 'grid';
+        }
+
+        function showContent(section) {
+            document.getElementById('menuGrid').style.display = 'none';
+            document.getElementById('contentSection').classList.add('active');
+            
+            const contentBody = document.getElementById('contentBody');
+            
+            const contents = {
+                pendahuluan: `
+                    <h2 class="content-title">Pendahuluan Kesetimbangan Kimia</h2>
+                    <div class="content-text">
+                        <p>Kesetimbangan kimia adalah keadaan dimana laju reaksi maju sama dengan laju reaksi balik, sehingga konsentrasi reaktan dan produk tidak berubah.</p>
+                        
+                        <h3>Pengertian Kesetimbangan Kimia</h3>
+                        <p>Dalam sistem kesetimbangan kimia, reaksi kimia tidak berhenti, melainkan tetap berlangsung dengan laju yang sama untuk kedua arah reaksi. Kondisi ini disebut kesetimbangan dinamis.</p>
+                        
+                        <h3>Ciri-ciri Kesetimbangan Kimia</h3>
+                        <ul>
+                            <li>Reaksi berlangsung dua arah (reversibel)</li>
+                            <li>Laju reaksi maju = laju reaksi balik</li>
+                            <li>Konsentrasi reaktan dan produk tetap (tidak berubah)</li>
+                            <li>Kesetimbangan bersifat dinamis</li>
+                            <li>Dapat dicapai dari arah manapun</li>
+                        </ul>
+                        
+                        <h3>Contoh Kesetimbangan dalam Kehidupan</h3>
+                        <p>Proses pembuatan amonia dalam industri (Proses Haber-Bosch), kesetimbangan CO₂ dalam minuman bersoda, dan kesetimbangan oksigen dalam hemoglobin darah.</p>
+                    </div>
+                `,
+                lkpd: `
+                    <h2 class="content-title">Lembar Kerja Peserta Didik (LKPD)</h2>
+                    <div class="content-text">
+                        <h3>Kegiatan 1: Mengamati Kesetimbangan Kimia</h3>
+                        <p><strong>Tujuan:</strong> Memahami konsep kesetimbangan dinamis</p>
+                        
+                        <p><strong>Pertanyaan Diskusi:</strong></p>
+                        <ul>
+                            <li>Apa yang dimaksud dengan reaksi reversibel?</li>
+                            <li>Mengapa konsentrasi zat dalam kesetimbangan tidak berubah?</li>
+                            <li>Jelaskan perbedaan kesetimbangan dinamis dan statis!</li>
+                        </ul>
+                        
+                        <h3>Kegiatan 2: Menghitung Tetapan Kesetimbangan</h3>
+                        <p>Diberikan reaksi: N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</p>
+                        <p>Jika pada kesetimbangan: [N₂] = 0,5 M, [H₂] = 1,5 M, [NH₃] = 1,0 M</p>
+                        <p><strong>Tugas:</strong> Hitung nilai tetapan kesetimbangan (Kc)!</p>
+                        
+                        <h3>Kegiatan 3: Faktor yang Mempengaruhi Kesetimbangan</h3>
+                        <p>Analisis bagaimana perubahan berikut mempengaruhi kesetimbangan:</p>
+                        <ul>
+                            <li>Penambahan konsentrasi reaktan</li>
+                            <li>Perubahan suhu</li>
+                            <li>Perubahan tekanan/volume</li>
+                            <li>Penambahan katalis</li>
+                        </ul>
+                    </div>
+                `,
+                materi: `
+                    <h2 class="content-title">Materi Kesetimbangan Kimia</h2>
+                    <div class="content-text">
+                        <h3>1. Tetapan Kesetimbangan (K)</h3>
+                        <p>Untuk reaksi: aA + bB ⇌ cC + dD</p>
+                        <p>Tetapan kesetimbangan konsentrasi (Kc) = [C]ᶜ[D]ᵈ / [A]ᵃ[B]ᵇ</p>
+                        
+                        <h3>2. Azas Le Chatelier</h3>
+                        <p>Jika suatu sistem kesetimbangan diberi aksi (perubahan), maka sistem akan mengadakan reaksi yang cenderung mengurangi pengaruh aksi tersebut.</p>
+                        
+                        <h3>3. Faktor-faktor yang Mempengaruhi Kesetimbangan</h3>
+                        <p><strong>a. Konsentrasi:</strong> Penambahan konsentrasi akan menggeser kesetimbangan menjauhi zat yang ditambah</p>
+                        <p><strong>b. Suhu:</strong> Kenaikan suhu menggeser ke arah reaksi endoterm</p>
+                        <p><strong>c. Tekanan/Volume:</strong> Penambahan tekanan menggeser ke arah jumlah mol gas yang lebih sedikit</p>
+                        <p><strong>d. Katalis:</strong> Mempercepat tercapainya kesetimbangan, tidak menggeser posisi kesetimbangan</p>
+                        
+                        <h3>4. Hubungan Kc dan Kp</h3>
+                        <p>Untuk reaksi gas: Kp = Kc(RT)^Δn</p>
+                        <p>Dimana Δn = (jumlah koefisien produk gas) - (jumlah koefisien reaktan gas)</p>
+                        
+                        <h3>5. Kesetimbangan Heterogen</h3>
+                        <p>Zat padat dan cairan murni tidak dimasukkan dalam perhitungan tetapan kesetimbangan karena konsentrasinya tetap.</p>
+                    </div>
+                `,
+                latihan: `
+                    <h2 class="content-title">Latihan Soal Kesetimbangan Kimia</h2>
+                    <div class="content-text">
+                        <h3>Soal 1</h3>
+                        <p>Dalam wadah 1 liter terdapat kesetimbangan: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g). Jika pada kesetimbangan terdapat 4 mol SO₂, 2 mol O₂, dan 8 mol SO₃, berapakah nilai Kc?</p>
+                        <div class="quiz-option">A. 2</div>
+                        <div class="quiz-option">B. 4</div>
+                        <div class="quiz-option">C. 8</div>
+                        <div class="quiz-option">D. 16</div>
+                        
+                        <h3>Soal 2</h3>
+                        <p>Reaksi: N₂O₄(g) ⇌ 2NO₂(g) ΔH = +58 kJ. Agar kesetimbangan bergeser ke kanan, maka yang harus dilakukan adalah...</p>
+                        <div class="quiz-option">A. Menurunkan suhu</div>
+                        <div class="quiz-option">B. Menaikkan suhu</div>
+                        <div class="quiz-option">C. Menambah katalis</div>
+                        <div class="quiz-option">D. Memperbesar tekanan</div>
+                        
+                        <h3>Soal 3</h3>
+                        <p>Pada reaksi: H₂(g) + I₂(g) ⇌ 2HI(g), jika konsentrasi H₂ diperbesar, maka...</p>
+                        <div class="quiz-option">A. Kesetimbangan bergeser ke kiri</div>
+                        <div class="quiz-option">B. Kesetimbangan bergeser ke kanan</div>
+                        <div class="quiz-option">C. Kesetimbangan tidak bergeser</div>
+                        <div class="quiz-option">D. Nilai K bertambah</div>
+                        
+                        <h3>Soal 4</h3>
+                        <p>Faktor yang tidak mempengaruhi pergeseran kesetimbangan adalah...</p>
+                        <div class="quiz-option">A. Konsentrasi</div>
+                        <div class="quiz-option">B. Suhu</div>
+                        <div class="quiz-option">C. Tekanan</div>
+                        <div class="quiz-option">D. Katalis</div>
+                        
+                        <h3>Soal 5</h3>
+                        <p>Dalam industri pembuatan amonia dengan reaksi: N₂(g) + 3H₂(g) ⇌ 2NH₃(g) ΔH = -92 kJ. Kondisi yang tepat untuk menghasilkan amonia maksimal adalah...</p>
+                        <div class="quiz-option">A. Suhu tinggi, tekanan rendah</div>
+                        <div class="quiz-option">B. Suhu tinggi, tekanan tinggi</div>
+                        <div class="quiz-option">C. Suhu rendah, tekanan tinggi</div>
+                        <div class="quiz-option">D. Suhu rendah, tekanan rendah</div>
+                    </div>
+                `,
+                pustaka: `
+                    <h2 class="content-title">Daftar Pustaka</h2>
+                    <div class="content-text">
+                        <h3>Buku Referensi</h3>
+                        <ul>
+                            <li>Petrucci, R. H., et al. (2017). <em>General Chemistry: Principles and Modern Applications</em>. Pearson Education.</li>
+                            <li>Chang, R., & Goldsby, K. (2016). <em>Chemistry</em> (12th ed.). McGraw-Hill Education.</li>
+                            <li>Brady, J. E., et al. (2017). <em>Chemistry: The Molecular Nature of Matter</em> (8th ed.). Wiley.</li>
+                            <li>Sudarmo, U. (2020). <em>Kimia untuk SMA/MA Kelas XI</em>. Jakarta: Erlangga.</li>
+                            <li>Purba, M. (2019). <em>Kimia untuk SMA Kelas XI</em>. Jakarta: Erlangga.</li>
+                        </ul>
+                        
+                        <h3>Jurnal dan Artikel Ilmiah</h3>
+                        <ul>
+                            <li>Atkins, P. W., & de Paula, J. (2018). <em>Physical Chemistry</em> (11th ed.). Oxford University Press.</li>
+                            <li>Levine, I. N. (2017). <em>Physical Chemistry</em> (6th ed.). McGraw-Hill.</li>
+                        </ul>
+                        
+                        <h3>Sumber Online</h3>
+                        <ul>
+                            <li>Khan Academy - Chemical Equilibrium: www.khanacademy.org</li>
+                            <li>ChemLibreTexts - Equilibrium: chem.libretexts.org</li>
+                            <li>Royal Society of Chemistry: www.rsc.org</li>
+                        </ul>
+                    </div>
+                `,
+                glosarium: `
+                    <h2 class="content-title">Glosarium</h2>
+                    <div class="content-text">
+                        <div class="glossary-item">
+                            <div class="glossary-term">Kesetimbangan Dinamis</div>
+                            <p>Keadaan dimana reaksi maju dan balik berlangsung terus-menerus dengan laju yang sama</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Tetapan Kesetimbangan (K)</div>
+                            <p>Nilai yang menyatakan perbandingan konsentrasi produk dan reaktan pada saat kesetimbangan</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Kc</div>
+                            <p>Tetapan kesetimbangan berdasarkan konsentrasi molar</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Kp</div>
+                            <p>Tetapan kesetimbangan berdasarkan tekanan parsial gas</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Azas Le Chatelier</div>
+                            <p>Prinsip yang menyatakan bahwa sistem kesetimbangan akan bereaksi untuk mengurangi gangguan yang diberikan</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Reaksi Reversibel</div>
+                            <p>Reaksi yang dapat berlangsung dua arah (bolak-balik)</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Kesetimbangan Homogen</div>
+                            <p>Kesetimbangan dimana semua zat memiliki fase yang sama</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Kesetimbangan Heterogen</div>
+                            <p>Kesetimbangan dimana zat-zat yang terlibat memiliki fase berbeda</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Pergeseran Kesetimbangan</div>
+                            <p>Perubahan komposisi zat-zat dalam sistem kesetimbangan akibat pengaruh luar</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">Katalis</div>
+                            <p>Zat yang mempercepat tercapainya kesetimbangan tanpa mengubah posisi kesetimbangan</p>
+                        </div>
+                    </div>
+                `
+            };
+            
+            contentBody.innerHTML = contents[section];
+        }
+        
+    </script>
+    <footer style="background: var(--bg-secondary); color: var(--text-secondary); text-align: center; padding: 1.5rem 0; margin-top: 3rem; box-shadow: 0 -2px 8px var(--shadow); font-size: 1rem;">
+    &copy; 2025 Tsary ▏ Universitas Negeri Malang </footer>
+</body>
+</html>
