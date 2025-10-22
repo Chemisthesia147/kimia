@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kesetimbangan Kimia - Pembelajaran Interaktif</title>
+    <title>Hidrolisis Garam</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
             --green: #34d399;
             --border: #334155;
             --shadow: rgba(34, 211, 238, 0.2);
-            --card-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --card-bg: linear-gradient(135deg, #025ff5 0%, #0f172a 100%);
         }
 
         body {
@@ -186,10 +186,11 @@
         }
 
         .menu-grid {
-            display: none;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;  
             margin-top: 2rem;
+            text-align: center;
         }
 
         .menu-card {
@@ -284,22 +285,6 @@
         .content-text li {
             margin-bottom: 0.5rem;
         }
-
-        .quiz-option {
-            background: var(--bg-primary);
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .quiz-option:hover {
-            border-color: var(--accent);
-            transform: translateX(5px);
-                }
-
         .profile-card {
             flex: 1 1 0;
             min-width: 280px;
@@ -342,19 +327,7 @@
             50% {
                 transform: translateY(-10px);
             }}
-        .glossary-item {
-            background: var(--bg-primary);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-        }
 
-        .glossary-term {
-            font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
         .content-title {
             text-align: center;
             color: #667eea;
@@ -388,6 +361,9 @@
             
             .menu-grid {
                 grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
+                align-items: center;  
             }
         }
             .container {
@@ -412,7 +388,7 @@
 <body>
     <div class="header">
         <div class="logo-section">
-            <img src="foto/logo um rev.png" alt="Logo Universitas Negeri Malang"
+            <img src="logo um rev.png" alt="Logo Universitas Negeri Malang"
 width="50" height="50"> 
 
             <div class="settings">
@@ -425,67 +401,58 @@ width="50" height="50">
         </div>
     </div>
 
-    <div class="container">
+    <div class="container"> 
         <div id="welcomeScreen" class="welcome-screen">
-            <h1 class="welcome-title">Kesetimbangan Kimia</h1>
-            <p class="welcome-subtitle">Platform Pembelajaran Interaktif untuk Memahami Konsep Kesetimbangan Kimia</p>
-            <button class="start-btn" onclick="startLearning()">🚀 Mulai Belajar</button>
+            <h1 class="welcome-title">Hidrolisis Garam</h1>
+            <p class="welcome-subtitle">Website Interaktif untuk Memahami Konsep Hidrolisis Garam</p>
+            <button class="start-btn" onclick="startLearning()">Mulai Belajar</button>
         </div>
 
-        <div id="menuGrid" class="menu-grid">
-            <div class="menu-card" onclick="showContent('pendahuluan')">
-                <div class="menu-icon">📖</div>
-                <h3 class="menu-title">Pendahuluan</h3>
-                <p class="menu-desc">Pengenalan konsep dasar kesetimbangan kimia</p>
-            </div>
-            <div class="menu-card" onclick="showContent('lkpd')">
-                <div class="menu-icon">📝</div>
-                <h3 class="menu-title">LKPD</h3>
-                <p class="menu-desc">Lembar Kerja Peserta Didik untuk praktik</p>
-            </div>
-            <div class="menu-card" onclick="showContent('materi')">
-                <div class="menu-icon">📚</div>
-                <h3 class="menu-title">Materi</h3>
-                <p class="menu-desc">Materi lengkap kesetimbangan kimia</p>
-            </div>
-            <div class="menu-card" onclick="showContent('latihan')">
-                <div class="menu-icon">✍️</div>
-                <h3 class="menu-title">Latihan Soal</h3>
-                <p class="menu-desc">Uji pemahaman dengan soal-soal latihan</p>
-            </div>
-            <div class="menu-card" onclick="showContent('pustaka')">
-                <div class="menu-icon">📑</div>
-                <h3 class="menu-title">Daftar Pustaka</h3>
-                <p class="menu-desc">Referensi dan sumber belajar</p>
-            </div>
-            <div class="menu-card" onclick="showContent('glosarium')">
-                <div class="menu-icon">📖</div>
-                <h3 class="menu-title">Glosarium</h3>
-                <p class="menu-desc">Kamus istilah kesetimbangan kimia</p>
-            </div>
-        </div>
 
         <div id="contentSection" class="content-section">
             <button class="back-btn" onclick="backToMenu()">← Kembali</button>
             <div id="contentBody"></div>
         </div>
+
+        
+        <div id="menuGrid" class="menu-grid"> 
+            <div class="menu-card" onclick="showContent('Modul 1')">
+                <h3 class="menu-title">Modul 1</h3>
+                <p class="menu-desc">Pendahuluan</p>
+            </div>
+             <div class="menu-card" onclick="showContent('Modul 2')">
+                <h3 class="menu-title">Modul 2</h3>
+                <p class="menu-desc">Teori</p>
+            </div>
+             <div class="menu-card" onclick="showContent('Modul 3')">
+                <h3 class="menu-title">Modul 3</h3>
+                <p class="menu-desc">Simulasi</p>
+            </div>
+             <div class="menu-card" onclick="showContent('Modul 4')">
+                <h3 class="menu-title">Modul 4</h3>
+                <p class="menu-desc">Lembar Kerja Peserta Didik</p>
+            </div>
+             <div class="menu-card" onclick="showContent('Modul 5')">
+                <h3 class="menu-title">Modul 5</h3>
+                <p class="menu-desc">Latihan Soal</p>
+            </div>
+        </div> 
+
     <div id="profileCard" class="container" style="display:none;">
     <h1 class="content-title">Profil Pengembang</h1>
     <div class="profile-container">
         <!-- Profil Kiri -->
-        <div class="profile-card">
-            <div class="profile-avatar">👨‍🎓</div>
+        <div class="profile-card"> <img src="profil web 1.png" alt="Foto profil Tsary Aqilah Arinanta" width="250" height="250">
             <h2 class="content-title">Tsary Aqilah Arinanta</h2>
             <div class="content-text">
-                <p> Seorang mahasiswa di Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Universitas Negeri Malang dengan Program Studi S1 Pendidikan Kimia.</p>
+                <p> Mahasiswa di Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Universitas Negeri Malang (UM) dengan Program Studi S1 Pendidikan Kimia.</p>
             </div>
         </div>
         <!-- Profil Kanan -->
-        <div class="profile-card">
-            <div class="profile-avatar">👩‍🎓</div>
+        <div class="profile-card"> <img src="profil web 2.png" alt="Foto profil Prof. Dr. Sumari, M.Si." width="250" height="250">
             <h2 class="content-title">Prof. Dr. Sumari, M.Si.</h2>
             <div class="content-text">
-                <p>Seorang Dosen di Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Universitas Negeri Malang (UM), beliau adalah bagian dari Departemen Kimia yang memiliki kepakaran di bidang Kimia Fisika. Profilnya sebagai dosen juga tercatat dalam direktori kepakaran Universitas Negeri Malang dan berbagai publikasi ilmiahnya dapat diakses melalui Google Scholar serta SINTA.</p>
+                <p>Dosen di Fakultas Matematika dan Ilmu Pengetahuan Alam (FMIPA), Universitas Negeri Malang (UM), beliau adalah bagian dari Departemen Kimia yang memiliki kepakaran di bidang Kimia Fisika. Profilnya sebagai dosen juga tercatat dalam direktori kepakaran Universitas Negeri Malang dan berbagai publikasi ilmiahnya dapat diakses melalui Google Scholar serta SINTA.</p>
             </div>
         </div>
     </div>
@@ -531,206 +498,11 @@ width="50" height="50">
             
             const contentBody = document.getElementById('contentBody');
             
-            const contents = {
-                pendahuluan: `
-                    <h2 class="content-title">Pendahuluan Kesetimbangan Kimia</h2>
-                    <div class="content-text">
-                        <p>Kesetimbangan kimia adalah keadaan dimana laju reaksi maju sama dengan laju reaksi balik, sehingga konsentrasi reaktan dan produk tidak berubah.</p>
-                        
-                        <h3>Pengertian Kesetimbangan Kimia</h3>
-                        <p>Dalam sistem kesetimbangan kimia, reaksi kimia tidak berhenti, melainkan tetap berlangsung dengan laju yang sama untuk kedua arah reaksi. Kondisi ini disebut kesetimbangan dinamis.</p>
-                        
-                        <h3>Ciri-ciri Kesetimbangan Kimia</h3>
-                        <ul>
-                            <li>Reaksi berlangsung dua arah (reversibel)</li>
-                            <li>Laju reaksi maju = laju reaksi balik</li>
-                            <li>Konsentrasi reaktan dan produk tetap (tidak berubah)</li>
-                            <li>Kesetimbangan bersifat dinamis</li>
-                            <li>Dapat dicapai dari arah manapun</li>
-                        </ul>
-                        
-                        <h3>Contoh Kesetimbangan dalam Kehidupan</h3>
-                        <p>Proses pembuatan amonia dalam industri (Proses Haber-Bosch), kesetimbangan CO₂ dalam minuman bersoda, dan kesetimbangan oksigen dalam hemoglobin darah.</p>
-                    </div>
-                `,
-                lkpd: `
-                    <h2 class="content-title">Lembar Kerja Peserta Didik (LKPD)</h2>
-                    <div class="content-text">
-                        <h3>Kegiatan 1: Mengamati Kesetimbangan Kimia</h3>
-                        <p><strong>Tujuan:</strong> Memahami konsep kesetimbangan dinamis</p>
-                        
-                        <p><strong>Pertanyaan Diskusi:</strong></p>
-                        <ul>
-                            <li>Apa yang dimaksud dengan reaksi reversibel?</li>
-                            <li>Mengapa konsentrasi zat dalam kesetimbangan tidak berubah?</li>
-                            <li>Jelaskan perbedaan kesetimbangan dinamis dan statis!</li>
-                        </ul>
-                        
-                        <h3>Kegiatan 2: Menghitung Tetapan Kesetimbangan</h3>
-                        <p>Diberikan reaksi: N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</p>
-                        <p>Jika pada kesetimbangan: [N₂] = 0,5 M, [H₂] = 1,5 M, [NH₃] = 1,0 M</p>
-                        <p><strong>Tugas:</strong> Hitung nilai tetapan kesetimbangan (Kc)!</p>
-                        
-                        <h3>Kegiatan 3: Faktor yang Mempengaruhi Kesetimbangan</h3>
-                        <p>Analisis bagaimana perubahan berikut mempengaruhi kesetimbangan:</p>
-                        <ul>
-                            <li>Penambahan konsentrasi reaktan</li>
-                            <li>Perubahan suhu</li>
-                            <li>Perubahan tekanan/volume</li>
-                            <li>Penambahan katalis</li>
-                        </ul>
-                    </div>
-                `,
-                materi: `
-                    <h2 class="content-title">Materi Kesetimbangan Kimia</h2>
-                    <div class="content-text">
-                        <h3>1. Tetapan Kesetimbangan (K)</h3>
-                        <p>Untuk reaksi: aA + bB ⇌ cC + dD</p>
-                        <p>Tetapan kesetimbangan konsentrasi (Kc) = [C]ᶜ[D]ᵈ / [A]ᵃ[B]ᵇ</p>
-                        
-                        <h3>2. Azas Le Chatelier</h3>
-                        <p>Jika suatu sistem kesetimbangan diberi aksi (perubahan), maka sistem akan mengadakan reaksi yang cenderung mengurangi pengaruh aksi tersebut.</p>
-                        
-                        <h3>3. Faktor-faktor yang Mempengaruhi Kesetimbangan</h3>
-                        <p><strong>a. Konsentrasi:</strong> Penambahan konsentrasi akan menggeser kesetimbangan menjauhi zat yang ditambah</p>
-                        <p><strong>b. Suhu:</strong> Kenaikan suhu menggeser ke arah reaksi endoterm</p>
-                        <p><strong>c. Tekanan/Volume:</strong> Penambahan tekanan menggeser ke arah jumlah mol gas yang lebih sedikit</p>
-                        <p><strong>d. Katalis:</strong> Mempercepat tercapainya kesetimbangan, tidak menggeser posisi kesetimbangan</p>
-                        
-                        <h3>4. Hubungan Kc dan Kp</h3>
-                        <p>Untuk reaksi gas: Kp = Kc(RT)^Δn</p>
-                        <p>Dimana Δn = (jumlah koefisien produk gas) - (jumlah koefisien reaktan gas)</p>
-                        
-                        <h3>5. Kesetimbangan Heterogen</h3>
-                        <p>Zat padat dan cairan murni tidak dimasukkan dalam perhitungan tetapan kesetimbangan karena konsentrasinya tetap.</p>
-                    </div>
-                `,
-                latihan: `
-                    <h2 class="content-title">Latihan Soal Kesetimbangan Kimia</h2>
-                    <div class="content-text">
-                        <h3>Soal 1</h3>
-                        <p>Dalam wadah 1 liter terdapat kesetimbangan: 2SO₂(g) + O₂(g) ⇌ 2SO₃(g). Jika pada kesetimbangan terdapat 4 mol SO₂, 2 mol O₂, dan 8 mol SO₃, berapakah nilai Kc?</p>
-                        <div class="quiz-option">A. 2</div>
-                        <div class="quiz-option">B. 4</div>
-                        <div class="quiz-option">C. 8</div>
-                        <div class="quiz-option">D. 16</div>
-                        
-                        <h3>Soal 2</h3>
-                        <p>Reaksi: N₂O₄(g) ⇌ 2NO₂(g) ΔH = +58 kJ. Agar kesetimbangan bergeser ke kanan, maka yang harus dilakukan adalah...</p>
-                        <div class="quiz-option">A. Menurunkan suhu</div>
-                        <div class="quiz-option">B. Menaikkan suhu</div>
-                        <div class="quiz-option">C. Menambah katalis</div>
-                        <div class="quiz-option">D. Memperbesar tekanan</div>
-                        
-                        <h3>Soal 3</h3>
-                        <p>Pada reaksi: H₂(g) + I₂(g) ⇌ 2HI(g), jika konsentrasi H₂ diperbesar, maka...</p>
-                        <div class="quiz-option">A. Kesetimbangan bergeser ke kiri</div>
-                        <div class="quiz-option">B. Kesetimbangan bergeser ke kanan</div>
-                        <div class="quiz-option">C. Kesetimbangan tidak bergeser</div>
-                        <div class="quiz-option">D. Nilai K bertambah</div>
-                        
-                        <h3>Soal 4</h3>
-                        <p>Faktor yang tidak mempengaruhi pergeseran kesetimbangan adalah...</p>
-                        <div class="quiz-option">A. Konsentrasi</div>
-                        <div class="quiz-option">B. Suhu</div>
-                        <div class="quiz-option">C. Tekanan</div>
-                        <div class="quiz-option">D. Katalis</div>
-                        
-                        <h3>Soal 5</h3>
-                        <p>Dalam industri pembuatan amonia dengan reaksi: N₂(g) + 3H₂(g) ⇌ 2NH₃(g) ΔH = -92 kJ. Kondisi yang tepat untuk menghasilkan amonia maksimal adalah...</p>
-                        <div class="quiz-option">A. Suhu tinggi, tekanan rendah</div>
-                        <div class="quiz-option">B. Suhu tinggi, tekanan tinggi</div>
-                        <div class="quiz-option">C. Suhu rendah, tekanan tinggi</div>
-                        <div class="quiz-option">D. Suhu rendah, tekanan rendah</div>
-                    </div>
-                `,
-                pustaka: `
-                    <h2 class="content-title">Daftar Pustaka</h2>
-                    <div class="content-text">
-                        <h3>Buku Referensi</h3>
-                        <ul>
-                            <li>Petrucci, R. H., et al. (2017). <em>General Chemistry: Principles and Modern Applications</em>. Pearson Education.</li>
-                            <li>Chang, R., & Goldsby, K. (2016). <em>Chemistry</em> (12th ed.). McGraw-Hill Education.</li>
-                            <li>Brady, J. E., et al. (2017). <em>Chemistry: The Molecular Nature of Matter</em> (8th ed.). Wiley.</li>
-                            <li>Sudarmo, U. (2020). <em>Kimia untuk SMA/MA Kelas XI</em>. Jakarta: Erlangga.</li>
-                            <li>Purba, M. (2019). <em>Kimia untuk SMA Kelas XI</em>. Jakarta: Erlangga.</li>
-                        </ul>
-                        
-                        <h3>Jurnal dan Artikel Ilmiah</h3>
-                        <ul>
-                            <li>Atkins, P. W., & de Paula, J. (2018). <em>Physical Chemistry</em> (11th ed.). Oxford University Press.</li>
-                            <li>Levine, I. N. (2017). <em>Physical Chemistry</em> (6th ed.). McGraw-Hill.</li>
-                        </ul>
-                        
-                        <h3>Sumber Online</h3>
-                        <ul>
-                            <li>Khan Academy - Chemical Equilibrium: www.khanacademy.org</li>
-                            <li>ChemLibreTexts - Equilibrium: chem.libretexts.org</li>
-                            <li>Royal Society of Chemistry: www.rsc.org</li>
-                        </ul>
-                    </div>
-                `,
-                glosarium: `
-                    <h2 class="content-title">Glosarium</h2>
-                    <div class="content-text">
-                        <div class="glossary-item">
-                            <div class="glossary-term">Kesetimbangan Dinamis</div>
-                            <p>Keadaan dimana reaksi maju dan balik berlangsung terus-menerus dengan laju yang sama</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Tetapan Kesetimbangan (K)</div>
-                            <p>Nilai yang menyatakan perbandingan konsentrasi produk dan reaktan pada saat kesetimbangan</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Kc</div>
-                            <p>Tetapan kesetimbangan berdasarkan konsentrasi molar</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Kp</div>
-                            <p>Tetapan kesetimbangan berdasarkan tekanan parsial gas</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Azas Le Chatelier</div>
-                            <p>Prinsip yang menyatakan bahwa sistem kesetimbangan akan bereaksi untuk mengurangi gangguan yang diberikan</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Reaksi Reversibel</div>
-                            <p>Reaksi yang dapat berlangsung dua arah (bolak-balik)</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Kesetimbangan Homogen</div>
-                            <p>Kesetimbangan dimana semua zat memiliki fase yang sama</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Kesetimbangan Heterogen</div>
-                            <p>Kesetimbangan dimana zat-zat yang terlibat memiliki fase berbeda</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Pergeseran Kesetimbangan</div>
-                            <p>Perubahan komposisi zat-zat dalam sistem kesetimbangan akibat pengaruh luar</p>
-                        </div>
-                        
-                        <div class="glossary-item">
-                            <div class="glossary-term">Katalis</div>
-                            <p>Zat yang mempercepat tercapainya kesetimbangan tanpa mengubah posisi kesetimbangan</p>
-                        </div>
-                    </div>
-                `
-            };
-            
             contentBody.innerHTML = contents[section];
         }
         
     </script>
-    <footer style="background: var(--bg-secondary); color: var(--text-secondary); text-align: center; padding: 1.5rem 0; margin-top: 3rem; box-shadow: 0 -2px 8px var(--shadow); font-size: 1rem;">
+    <footer style="background: var(--bg-secondary); color: var(--text-secondary); text-align: center; padding: 1.5rem 0; margin-top: 2rem; box-shadow: 0 -2px 8px var(--shadow); font-size: 1rem;">
     &copy; 2025 Tsary ▏ Universitas Negeri Malang </footer>
 </body>
 </html>
