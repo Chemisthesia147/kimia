@@ -186,11 +186,10 @@
         }
 
         .menu-grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;  
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
             margin-top: 2rem;
-            text-align: center;
         }
 
         .menu-card {
@@ -327,7 +326,19 @@
             50% {
                 transform: translateY(-10px);
             }}
+        .glossary-item {
+            background: var(--bg-primary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
 
+        .glossary-term {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
         .content-title {
             text-align: center;
             color: #667eea;
@@ -361,9 +372,6 @@
             
             .menu-grid {
                 grid-template-columns: 1fr;
-                display: flex;
-                flex-direction: column;
-                align-items: center;  
             }
         }
             .container {
@@ -401,43 +409,35 @@ width="50" height="50">
         </div>
     </div>
 
-    <div class="container"> 
+    <div class="container">
         <div id="welcomeScreen" class="welcome-screen">
             <h1 class="welcome-title">Hidrolisis Garam</h1>
             <p class="welcome-subtitle">Website Interaktif untuk Memahami Konsep Hidrolisis Garam</p>
             <button class="start-btn" onclick="startLearning()">Mulai Belajar</button>
         </div>
 
+        <div id="menuGrid" class="menu-grid">
+            <div class="menu-card" onclick="showContent('Materi')">
+                <div class="menu-icon">📚</div>
+                <h3 class="menu-title">Materi</h3>
+                <p class="menu-desc">Materi Hidrolisis Garam</p>
+            </div>
+            <div class="menu-card" onclick="showContent('pustaka')">
+                <div class="menu-icon">📑</div>
+                <h3 class="menu-title">Daftar Pustaka</h3>
+                <p class="menu-desc">Referensi dan sumber belajar</p>
+            </div>
+            <div class="menu-card" onclick="showContent('glosarium')">
+                <div class="menu-icon">📖</div>
+                <h3 class="menu-title">Glosarium</h3>
+                <p class="menu-desc">Kamus istilah dalam Hidrolisis Garam</p>
+            </div>
+        </div>
 
         <div id="contentSection" class="content-section">
             <button class="back-btn" onclick="backToMenu()">← Kembali</button>
             <div id="contentBody"></div>
         </div>
-
-        
-        <div id="menuGrid" class="menu-grid"> 
-            <div class="menu-card" onclick="showContent('Modul 1')">
-                <h3 class="menu-title">Modul 1</h3>
-                <p class="menu-desc">Pendahuluan</p>
-            </div>
-             <div class="menu-card" onclick="showContent('Modul 2')">
-                <h3 class="menu-title">Modul 2</h3>
-                <p class="menu-desc">Teori</p>
-            </div>
-             <div class="menu-card" onclick="showContent('Modul 3')">
-                <h3 class="menu-title">Modul 3</h3>
-                <p class="menu-desc">Simulasi</p>
-            </div>
-             <div class="menu-card" onclick="showContent('Modul 4')">
-                <h3 class="menu-title">Modul 4</h3>
-                <p class="menu-desc">Lembar Kerja Peserta Didik</p>
-            </div>
-             <div class="menu-card" onclick="showContent('Modul 5')">
-                <h3 class="menu-title">Modul 5</h3>
-                <p class="menu-desc">Latihan Soal</p>
-            </div>
-        </div> 
-
     <div id="profileCard" class="container" style="display:none;">
     <h1 class="content-title">Profil Pengembang</h1>
     <div class="profile-container">
@@ -497,6 +497,69 @@ width="50" height="50">
             document.getElementById('contentSection').classList.add('active');
             
             const contentBody = document.getElementById('contentBody');
+            
+            const contents = {
+                Materi: `
+                    <h2 class="content-title">Modul 1: Pendahuluan</h2>
+                    <div class="content-text">
+                        <h3>Tujuan pembelajaran:</h3>
+                        <ul>
+                            <li>Menjelaskan konsep hidrolisis.</li>
+                            <li>Mengidentifikasi jenis-jenis garam berdasarkan hasil hidrolisisnya.</li>
+                            <li>Mengidentifikasi larutan garam yang dapat mengalami hidrolisis berdasarkan jenis komponen kation dan anionnya.</li>
+                            <li>Menghitung tetapan hidrolisis.</li>
+                            <li>Menentukan pH larutan garam.</li>
+                            <li>Memberikan contoh hidrolisis garam dalam kehidupan sehari-hari.</li>
+                        </ul>
+                `,
+                pustaka: `
+                    <h2 class="content-title">Daftar Pustaka</h2>
+                    <div class="content-text">
+                        <h3>Buku Referensi</h3>
+                        <ul>
+                            <li>Petrucci, R. H., et al. (2017). <em>General Chemistry: Principles and Modern Applications</em>. Pearson Education.</li>
+                            <li>Chang, R., & Goldsby, K. (2016). <em>Chemistry</em> (12th ed.). McGraw-Hill Education.</li>
+                            <li>Brady, J. E., et al. (2017). <em>Chemistry: The Molecular Nature of Matter</em> (8th ed.). Wiley.</li>
+                            <li>Sudarmo, U. (2020). <em>Kimia untuk SMA/MA Kelas XI</em>. Jakarta: Erlangga.</li>
+                            <li>Purba, M. (2019). <em>Kimia untuk SMA Kelas XI</em>. Jakarta: Erlangga.</li>
+                        </ul>
+                        
+                        <h3>Jurnal dan Artikel Ilmiah</h3>
+                        <ul>
+                            <li>Atkins, P. W., & de Paula, J. (2018). <em>Physical Chemistry</em> (11th ed.). Oxford University Press.</li>
+                            <li>Levine, I. N. (2017). <em>Physical Chemistry</em> (6th ed.). McGraw-Hill.</li>
+                        </ul>
+                        
+                        <h3>Sumber Online</h3>
+                        <ul>
+                            <li>Khan Academy - Chemical Equilibrium: www.khanacademy.org</li>
+                            <li>ChemLibreTexts - Equilibrium: chem.libretexts.org</li>
+                            <li>Royal Society of Chemistry: www.rsc.org</li>
+                        </ul>
+                    </div>
+                `,
+                glosarium: `
+                    <h2 class="content-title">Glosarium</h2>
+                    <div class="content-text">
+                        <div class="glossary-item">
+                            <div class="glossary-term">Hidrolisis Garam</div>
+                            <p>????</p>
+                        </div>
+                        
+                        <div class="glossary-item">
+                            <div class="glossary-term">1111</div>
+                            <p>22222</p>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-term">1111</div>
+                            <p>22222</p>
+                        </div>
+                        <div class="glossary-item">
+                            <div class="glossary-term">1111</div>
+                            <p>22222</p>
+                        </div>
+                `
+            };
             
             contentBody.innerHTML = contents[section];
         }
